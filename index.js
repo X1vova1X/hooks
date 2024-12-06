@@ -1,8 +1,10 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors({origin: "*"}));
 
 app.get('/post', async (req, res) => {
   const { content, webhookUrl } = req.query;
