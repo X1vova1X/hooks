@@ -4,8 +4,8 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-app.post('/post', async (req, res) => {
-  const { content, webhookUrl } = req.body;
+app.get('/post', async (req, res) => {
+  const { content, webhookUrl } = req.query;
 
   if (!content || !webhookUrl) {
     return res.status(400).json({ error: 'Content and webhook URL are required' });
