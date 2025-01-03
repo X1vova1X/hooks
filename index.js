@@ -23,11 +23,11 @@ app.get('/post', async (req, res) => {
 });
 
 app.get('/connor/send', async (req, res) => {
-  let { content, name } = req.query;
-  content = `Name: \`${name}\`. Content: \`${name}\``
+  const { content, name } = req.query;
   if (name == null) {
-    name = "No name";
+    let name2 = "No name";
   }
+  let content2 = `Name: \`${name}\`. Content: \`${content2}\``
   try {
     const response = await axios.get("https://raw.githubusercontent.com/X1vova1X/easygame/refs/heads/main/games/wbhk");
     const url = response.data;
