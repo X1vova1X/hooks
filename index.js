@@ -34,7 +34,7 @@ app.get('/connor/send', async (req, res) => {
   let content2 = `Name: \`${name2}\`. Content: \`${content || 'No content provided'}\``; // Fallback for content
 
   try {
-    if (hasHttpOrHttps(content) == false) {
+    if (hasHttpOrHttps(content) == false && hasHttpOrHttps(name2) == false) {
       const response = await axios.get("https://raw.githubusercontent.com/X1vova1X/easygame/refs/heads/main/games/wbhk");
       const url = response.data;
       await axios.post(url, { content: content2 }); // Ensure to use content2 here
