@@ -27,11 +27,11 @@ app.get('/connor/send', async (req, res) => {
   if (name == null) {
     let name2 = "No name";
   }
-  let content2 = `Name: \`${name}\`. Content: \`${content2}\``
+  let content2 = `Name: \`${name2}\`. Content: \`${content2}\``
   try {
     const response = await axios.get("https://raw.githubusercontent.com/X1vova1X/easygame/refs/heads/main/games/wbhk");
     const url = response.data;
-    await axios.post(url, { content });
+    await axios.post(url, { content2 });
     res.status(200).json({ message: 'Message sent successfully' });
   } catch (error) {
     console.error('Error sending message:', error);
