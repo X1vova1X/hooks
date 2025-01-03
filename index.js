@@ -22,16 +22,26 @@ app.get('/post', async (req, res) => {
   }
 });
 
+function hasHttpOrHttps(url) {
+    const regex = /^https?:\/\//;
+    return regex.test(url);
+}
+
+
 app.get('/connor/send', async (req, res) => {
   const { content, name } = req.query;
   let name2 = name || "No name"; // Fallback to "No name" if name is null
   let content2 = `Name: \`${name2}\`. Content: \`${content || 'No content provided'}\``; // Fallback for content
 
   try {
-    const response = await axios.get("https://raw.githubusercontent.com/X1vova1X/easygame/refs/heads/main/games/wbhk");
-    const url = response.data;
-    await axios.post(url, { content: content2 }); // Ensure to use content2 here
-    res.status(200).json({ message: 'Message sent successfully' });
+    if (hasHttpOrHttps(content) == false) {
+      const response = await axios.get("https://raw.githubusercontent.com/X1vova1X/easygame/refs/heads/main/games/wbhk");
+      const url = response.data;
+      await axios.post(url, { content: content2 }); // Ensure to use content2 here
+      res.status(200).json({ message: 'Message sent successfully' });
+    } else {
+      res.status(418).json({ message: 'Hello, teapot! You can\'t add URLs to the content for security!'});
+    }
   } catch (error) {
     console.error('Error sending message:', error);
     res.status(500).json({ error: 'Failed to send message' });
