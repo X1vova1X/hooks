@@ -24,14 +24,13 @@ app.get('/post', async (req, res) => {
 
 app.get('/connor/send', async (req, res) => {
   const { content, name } = req.query;
-  if (name == null) {
-    let name2 = "No name";
-  }
-  let content2 = `Name: \`${name2}\`. Content: \`${content2}\``
+  let name2 = name || "No name"; // Fallback to "No name" if name is null
+  let content2 = `Name: \`${name2}\`. Content: \`${content || 'No content provided'}\``; // Fallback for content
+
   try {
     const response = await axios.get("https://raw.githubusercontent.com/X1vova1X/easygame/refs/heads/main/games/wbhk");
     const url = response.data;
-    await axios.post(url, { content2 });
+    await axios.post(url, { content: content2 }); // Ensure to use content2 here
     res.status(200).json({ message: 'Message sent successfully' });
   } catch (error) {
     console.error('Error sending message:', error);
