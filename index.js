@@ -40,7 +40,7 @@ app.get('/connor/send', async (req, res) => {
       await axios.post(url, { content: content2 }); // Ensure to use content2 here
       res.status(200).json({ message: 'Message sent successfully' });
     } else {
-      res.status(418).json({ message: 'Hello, teapot! You can\'t add URLs to the content for security!'});
+      res.status(418).json({ error: 418, message: 'Hello, teapot! You can\'t add URLs to the content for security!'});
     }
   } catch (error) {
     console.error('Error sending message:', error);
